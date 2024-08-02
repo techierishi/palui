@@ -178,9 +178,6 @@ function App() {
         <input id="search" type="text" placeholder="Type some text" />
         <ul className="drop"></ul>
       </div>
-      <div>
-        <p>{time}</p>
-      </div>
     </div>
   );
 }

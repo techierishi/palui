@@ -1,12 +1,10 @@
 html {
-    background-color: rgba(27, 38, 54, 1);
+    background-color: rgb(255, 255, 255);
     text-align: center;
-    color: white;
 }
 
 body {
     margin: 0;
-    color: white;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -20,10 +18,6 @@ body {
     url("assets/fonts/nunito-v16-latin-regular.woff2") format("woff2");
 }
 
-#app {
-    height: 50vh;
-    text-align: center;
-}
 
 * {
     margin: 0;
@@ -31,18 +25,12 @@ body {
     box-sizing: border-box;
 }
 
-body {
-    background: linear-gradient(to right, #22c1c3, #fdbb2d);
-    font-family: 'Raleway', sans-serif;
-    color: rgb(73, 73, 73);
-}
 
 .container {
     position: absolute;
-    top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    width: 96%;
+    width: 100%;
 }
 
 input#search {
