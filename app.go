@@ -48,7 +48,7 @@ func (a *App) GetClipData(name string) string {
 		fmt.Println("ReadAll", err)
 		return "[]"
 	}
-	// clipm.Reverse(*clipList)
+	clipm.SortByTimestamp(*clipList)
 	jsonClipList, err := json.Marshal(clipList)
 	if err != nil {
 		fmt.Println("Reverse", err)
