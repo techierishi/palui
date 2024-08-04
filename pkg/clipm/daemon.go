@@ -7,6 +7,7 @@ import (
 
 	"palclip/pkg/util"
 
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 	"golang.design/x/clipboard"
 )
 
@@ -41,6 +42,7 @@ func Record() error {
 		}
 
 		copiedStr := string(data)
+		runtime.EventsEmit(context.TODO(), "copyEvent", nil)
 
 		timestamp := util.UnixMilli()
 		clipInfo := ClipInfo{

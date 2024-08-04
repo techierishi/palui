@@ -6,9 +6,8 @@ import (
 	"palclip/pkg/config"
 	"sort"
 
-	bolt "go.etcd.io/bbolt"
-
 	"github.com/rs/zerolog"
+	bolt "go.etcd.io/bbolt"
 )
 
 type ClipM struct {

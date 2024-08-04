@@ -3,8 +3,18 @@ import "./App.css";
 import { GetClipData, CopyItemContent } from "../wailsjs/go/main/App";
 
 import { EventsOn } from "../wailsjs/runtime/runtime";
-import { Button, Card, CardList } from "@blueprintjs/core";
-import { InputGroup } from "@blueprintjs/core";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Input,
+  Text,
+  Stack,
+  Box,
+  Button,
+  StackDivider
+} from "@chakra-ui/react";
+
 function App() {
   const [filterValue, setFilterValue] = useState("");
 
@@ -32,34 +42,52 @@ function App() {
   }, []);
 
   function clipData() {
-    setInterval(() => {
+    GetClipData("none").then(updateClipList);
+    const onCopyEvent = (message: any) => {
+      console.log("onCopyEvent.message ", message)
       GetClipData("none").then(updateClipList);
-    }, 1000);
+    };
+    const win:any = window
+    win.runtime.EventsOn('importEvent', onCopyEvent);
   }
 
   function copyItem(e: Event, itemContent: string) {
-      e.preventDefault()
-      console.log("copyItem...")  
-      CopyItemContent(itemContent);
-      return false
+    e.preventDefault();
+    console.log("copyItem...");
+    CopyItemContent(itemContent);
+    return false;
   }
 
   return (
     <div id="App">
-      <div className="bp5-input-group {{.modifier}}">
-        <span className="bp5-icon bp5-icon-search"></span>
-        <input type="text" className="bp5-input" placeholder="Search" />
-      </div>
-      <CardList compact={true}>
-        {clipList.map((itm: any) => (
-          <Card>
-            <div className="list-card">
-              <span> {itm.content.slice(0, 40) + "..."} </span>
-              <Button minimal={true} intent="primary" onClick={(e:Event) => copyItem(e, itm.content)}>Copy</Button>
-            </div>
-          </Card>
-        ))}
-      </CardList>
+      <Card>
+        <CardHeader>
+          <Input className="search-input" placeholder="search" size="sm" />
+        </CardHeader>
+
+        <CardBody>
+          <Stack divider={<StackDivider />} spacing="2">
+
+
+              {clipList.map((itm: any) => (
+                <Box>
+                  <div className="list-card">
+                  <Text pt="2" fontSize="sm"> {itm.content.slice(0, 40) + "..."} </Text>
+
+                    <Button
+                      colorScheme="teal"
+                      variant="ghost"
+                      size='sm'
+                      onClick={(e: any) => copyItem(e, itm.content)}
+                    >
+                      Copy
+                    </Button>
+                  </div>
+                </Box>
+              ))}
+          </Stack>
+        </CardBody>
+      </Card>
     </div>
   );
 }
