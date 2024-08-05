@@ -23,7 +23,7 @@ func itob(v int) []byte {
 	return b
 }
 
-func Record() error {
+func Record(ctx context.Context) error {
 	logger := util.GetLogInstance()
 	logger.Info().Msg("Clipboard recording started...")
 
@@ -32,7 +32,7 @@ func Record() error {
 		panic(err)
 	}
 
-	ch := clipboard.Watch(context.TODO(), clipboard.FmtText)
+	ch := clipboard.Watch(ctx, clipboard.FmtText)
 
 	for data := range ch {
 
@@ -42,7 +42,6 @@ func Record() error {
 		}
 
 		copiedStr := string(data)
-		runtime.EventsEmit(context.TODO(), "copyEvent", nil)
 
 		timestamp := util.UnixMilli()
 		clipInfo := ClipInfo{
@@ -55,6 +54,8 @@ func Record() error {
 
 		str := util.CleanStr(copiedStr).StandardizeSpaces().TruncateText(10).ReplaceNewLine()
 		logger.Info().Msg(string(str + "... COPIED!"))
+		runtime.EventsEmit(ctx, "copyEvent", nil)
+
 	}
 
 	return nil

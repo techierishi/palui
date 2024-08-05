@@ -28,11 +28,10 @@ func NewApp() *App {
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
-	go clipm.Record()
+	go clipm.Record(ctx)
 	// register hotkey on the app startup
 	// if you try to register it anywhere earlier - the app will hang on compile step
 	mainthread.Init(a.RegisterHotKey)
-
 }
 
 func (a *App) GetClipData(name string) string {
