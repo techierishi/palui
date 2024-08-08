@@ -11,16 +11,12 @@ import {
   Text,
   Stack,
   Box,
-  Button,
-  StackDivider,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Kbd,
   IconButton,
   Flex, 
-  Spacer
 } from "@chakra-ui/react";
 
 import { SettingsIcon, CopyIcon } from "@chakra-ui/icons";
@@ -79,9 +75,9 @@ function App() {
   }
 
   return (
-    <div id="App">
+    <div id="pal-app">
       <Card>
-        <CardHeader>
+        <CardHeader style={{padding: "5px"}}>
         <Flex>
           <Input className="search-input" placeholder="search" size="sm" />
           <Menu>
@@ -103,8 +99,8 @@ function App() {
           </Flex>
         </CardHeader>
 
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing="2">
+        <CardBody style={{padding: "10px"}}>
+          <Stack spacing="2">
             {clipList.map((itm: any) => (
               <Box>
                 <Flex>
@@ -112,8 +108,6 @@ function App() {
                     {" "}
                     {clearStr(itm.content)}{" "}
                   </Text>
-
-                  <Kbd> ctrl + 1</Kbd>
                   <IconButton
                     colorScheme="teal"
                     variant="ghost"
